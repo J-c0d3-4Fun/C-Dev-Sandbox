@@ -9,7 +9,8 @@ This directory contains my code labs, exercises, and study notes from following 
 
 | Exercise | Description | Status |
 |:---|:---|:---|
-| **[`getLength.c`](file:///Users/jbrown/c-applitcations/beej-guide-to-c-notes/getLength.c)** | Re-implementing the standard `strlen()` function manually using pointer arithmetic. | ✅ Completed |
+| **[`getLength.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/getLength.c)** | Re-implementing the standard `strlen()` function manually using pointer arithmetic. | ✅ Completed |
+| **[`arrowop.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/arrowop.c)** | Demonstrating the arrow operator (`->`) to access and modify struct fields via pointers. | ✅ Completed |
 
 ---
 
@@ -29,11 +30,29 @@ In C, a "string" isn't a primitive type like in Python or Java. It is defined by
 > - `strlen()`: Calculates length by counting bytes until `\0`.
 > - `strcpy()`: Copies bytes from source to destination until `\0`.
 
+### 🏹 The Arrow Operator (`->`)
+The arrow operator is primarily used when referring to fields inside **pointers to structs**.
+
+#### Why use pointers to structs?
+There are basically two main cases when you’d want to pass a pointer to a struct instead of the struct itself:
+
+1.  **Efficiency**: The struct is large, and it’s more expensive to copy that entire data structure onto the stack than it is to just copy a small pointer (memory address).
+2.  **Mutability (State Change)**: You need the function to be able to make changes to the struct that was passed in, and have those changes show in the caller.
+
+**Example:**
+```c
+void setPrice(struct truck *t, float newPrice) {
+    // "t" is a pointer, so we use arrow to dereference AND access the field
+    t->price = newPrice; 
+}
+```
+
 ---
 
 ## 🧠 Key Takeaways
 - **Pointers vs Arrays**: An uninitialized pointer (`char *p`) points to garbage; an array (`char p[255]`) reserves actual safe memory.
 - **Immutability**: String literals (`char *s = "Hello"`) are stored in read-only memory and cannot be modified.
+- **Arrow Syntax**: `ptr->field` is exactly the same as `(*ptr).field`, just cleaner.
 
 ---
 *Notes maintained by [J Brown](https://github.com/J-c0d3-4Fun)*
