@@ -1,72 +1,71 @@
-# C Learning Journey 🚀
+# 🛡️ Red Team Engineering Path: C & Low-Level Internals
 
-Welcome to my C programming repository! This collection documents my complete journey learning C, following the [FreeCodeCamp / Giraffe Academy course](https://www.youtube.com/watch?v=KJgsSFOSQv0).
+> *"To break the system, you must first understand how the system is built."*
 
-I have now **completed** the course! 🎉 This repo contains everything from "Hello World" to complex topics like pointers, structs, and file manipulation.
+Welcome to my engineering journal. This repository documents my journey to becoming a **Red Team Engineer**, starting with the foundational language of systems programming: **C**.
 
-## 📂 Repository Structure
+My goal is to master low-level programming to understand operating system internals, memory management, and eventually build custom **Command & Control (C2)** frameworks and security tooling.
 
-### 🛠️ Mini-Projects
-Practical applications built to put concepts into practice:
-- **[Better Calculator](file:///Users/jbrown/c-applitcations/betterCalculator.c)**: An upgraded calculator handling operators and user input.
-- **[Guessing Game](file:///Users/jbrown/c-applitcations/guessingGame.c)**: A number guessing game using loops and logic.
-- **[Madlibs](file:///Users/jbrown/c-applitcations/madlibs.c)**: A classic word game implementation.
-- **[Basic Calculator](file:///Users/jbrown/c-applitcations/calculator.c)**: My first simple calculator.
+## 🗺️ Learning Roadmap & Resources
 
-### 📖 Learning Concepts
-Located in the [`learning/`](file:///Users/jbrown/c-applitcations/learning/) directory, organized by topic:
+### 📚 Books & Documentation
+| Resource | Focus Area | Status |
+|:---|:---|:---|
+| **[Beej's Guide to C Programming](https://beej.us/guide/bgc/)** | Pointers, Memory, Structs | 🟡 In Progress |
+| **The C Programming Language (K&R)** | Language Foundations | ⚪ Backlog |
+| **Hacking: The Art of Exploitation** | Exploitation, Buffer Overflows | ⚪ Backlog |
+| **Windows Internals (Part 1 & 2)** | OS Architecture | ⚪ Backlog |
 
-#### Basics & Core Syntax
-- `helloworld.c` - Setup and basic output
-- `variables.c` & `dataTypes.c` - storing text, integers, and decimals
-- `constants.c` - Immutable values
-- `printf.c` & `userInput.c` - Input/Output operations
-- `math.c` - Basic mathematical operations
-
-#### Control Flow & Logic
-- `ifstatements.c` & `switch.c` - Conditional logic
-- `whileloop.c` & `forloops.c` - Iteration and loops
-- `return.c` - Returning values from functions
-
-#### Data Structures
-- `arrays.c` - Working with lists of data
-- `2darraysNestedLoops.c` - Matrices and nested iteration
-- `struct.c` - Creating custom data types (Classes/Objects equivalent)
-
-#### Pointers & Memory
-- `memoryaddress.c` - Understanding RAM and addresses
-- `pointers.c` - Creating and using pointers
-- `dereferencepointers.c` - Accessing data via pointers
-
-#### File Handling
-- `writeToFiles.c` - Creating and appending to files
-- `readingFiles.c` - Parsing text files
-
-## 💻 How to Run
-
-To run these programs, you'll need a C compiler (like `gcc` or `clang`).
-
-1. **Compile a file:**
-   ```bash
-   clang filename.c -o output_name
-   ```
-   *Example:*
-   ```bash
-   clang guessingGame.c -o game
-   ```
-
-2. **Run the executable:**
-   ```bash
-   ./output_name
-   ```
-   *Example:*
-   ```bash
-   ./game
-   ```
-
-## 📚 Resources
-- **Course**: [FreeCodeCamp.org C Programming Tutorial](https://www.youtube.com/watch?v=KJgsSFOSQv0)
-- **Instructor**: Giraffe Academy
+### 📺 Courses & Video Tutorials
+| Course | Instructor | Status | Key Takeaways |
+|:---|:---|:---|:---|
+| **[C Programming Full Course](https://www.youtube.com/watch?v=KJgsSFOSQv0)** | FreeCodeCamp / Giraffe Academy | ✅ Completed | Syntax, Control Flow, File I/O |
+| **Malware Development Essentials** | *TBD* | ⚪ Planned | Process Injection, Hooking |
 
 ---
-*Course Completed! Thanks for checking out my code.*
+
+## 📂 Phase 2: Deep Dive (Memory & Pointers)
+Currently working through advanced concepts required for C2 development.
+
+- **[📁 /beej-guide-to-c-notes](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/)**: Notes and labs from Beej's Guide.
+    - *Focus:* Manual memory management, implementing standard library functions, structs.
+
+---
+
+## 📂 Phase 1: C Foundations
+*Completed via FreeCodeCamp / Giraffe Academy*
+
+This phase focused on syntax, basic data structures, and understanding how to compile and run C programs.
+
+### 🛠️ Projects
+Practical applications built to put concepts into practice:
+- **[Better Calculator](file:///Users/jbrown/C-Dev-Sandbox/betterCalculator.c)**: An upgraded calculator handling operators and user input.
+- **[Guessing Game](file:///Users/jbrown/C-Dev-Sandbox/guessingGame.c)**: A number guessing game using loops and logic.
+- **[Madlibs](file:///Users/jbrown/C-Dev-Sandbox/madlibs.c)**: A classic word game implementation.
+- **[Basic Calculator](file:///Users/jbrown/C-Dev-Sandbox/calculator.c)**: My first simple calculator.
+
+### 📖 Core Concepts
+Located in the [`learning/`](file:///Users/jbrown/C-Dev-Sandbox/learning/) directory:
+*   **Basics**: Variables, Data Types, Constants, Input/Output (`printf`, `scanf`)
+*   **Logic**: If/Else, Switch, While/For Loops
+*   **Data Structures**: Arrays, 2D Arrays, Structs
+*   **Memory**: Pointers, Dereferencing, Memory Addresses
+*   **File I/O**: Reading and writing text files
+
+---
+
+## 💻 Environment & Usage
+
+**Compiler**: `clang` / `gcc`
+
+To compile and run any file in this repo:
+```bash
+# Compile
+clang filename.c -o output_name
+
+# Run
+./output_name
+```
+
+---
+*Tracking my progress from "Hello World" to Root.* 🚩
