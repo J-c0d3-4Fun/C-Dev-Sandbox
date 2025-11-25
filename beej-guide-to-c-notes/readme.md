@@ -13,6 +13,7 @@ This directory contains my code labs, exercises, and study notes from following 
 |:---|:---|:---|
 | **[`getLength.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/getLength.c)** | Re-implementing the standard `strlen()` function manually using pointer arithmetic. | ✅ Completed |
 | **[`arrowop.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/arrowop.c)** | Demonstrating the arrow operator (`->`) to access and modify struct fields via pointers. | ✅ Completed |
+| **[`typedef.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/typedef.c)** | Exploring type abstraction, anonymous structs, and pointer obfuscation. | ✅ Completed |
 
 ---
 
@@ -69,6 +70,18 @@ All I/O in C is handled through the `FILE*` type, which holds the state of the s
 > Binary file handling (`fread`/`fwrite`) is critical for **data exfiltration**.
 > *   *Concept:* Read sensitive files as raw binary.
 > *   *Challenge:* Need to implement **obfuscation/encryption** (XOR, AES) on the buffer before writing or sending it to the C2 server to avoid detection.
+
+### 🎭 Typedef & Abstraction
+The `typedef` keyword allows you to create an alias for an existing type. While useful for cleaner code, it also serves a strategic purpose in obfuscation.
+
+#### Use Cases:
+1.  **Anonymous Structs**: Define a struct and its alias in one go, so you never have to write `struct Name` again.
+2.  **Pointer Hiding**: You can `typedef` a pointer type (e.g., `typedef int *HANDLE;`).
+    *   *Pros:* Makes code "abstract" and cleaner to read.
+    *   *Cons:* Hides the fact that the variable is a pointer, which can lead to confusion if not careful.
+
+> **🕵️‍♂️ Red Team Note:**
+> Typedefs are excellent for **obfuscation**. By renaming common types (or pointers to shellcode) to mundane names like `GraphicsContext` or `PixelData`, you can sometimes confuse simple static analysis or human analysts looking at your code. Hiding the `*` (pointer) inside a typedef makes the data flow harder to track visually.
 
 ---
 *Notes maintained by [J Brown](https://github.com/J-c0d3-4Fun)*

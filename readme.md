@@ -20,7 +20,8 @@ My goal is to master low-level programming to understand operating system intern
 | Course | Instructor | Status | Key Takeaways |
 |:---|:---|:---|:---|
 | **[C Programming Full Course](https://www.youtube.com/watch?v=KJgsSFOSQv0)** | FreeCodeCamp / Giraffe Academy | ✅ Completed | Syntax, Control Flow, File I/O |
-| **Malware Development Essentials** | *TBD* | ⚪ Planned | Process Injection, Hooking |
+| **[Malware Development Essentials](https://institute.sektor7.net/)** | Sektor7 Institute | ⚪ Planned | Windows API, PE Structure, Injection |
+| **[Maldev Academy](https://maldevacademy.com/)** | Maldev Academy | ⚪ Planned | Advanced Evasion, C/C++ Deep Dive |
 
 ---
 
