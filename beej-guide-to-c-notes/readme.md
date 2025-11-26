@@ -14,6 +14,7 @@ This directory contains my code labs, exercises, and study notes from following 
 | **[`getLength.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/getLength.c)** | Re-implementing the standard `strlen()` function manually using pointer arithmetic. | ✅ Completed |
 | **[`arrowop.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/arrowop.c)** | Demonstrating the arrow operator (`->`) to access and modify struct fields via pointers. | ✅ Completed |
 | **[`typedef.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/typedef.c)** | Exploring type abstraction, anonymous structs, and pointer obfuscation. | ✅ Completed |
+| **[`quickSort.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/quickSort.c)** | Implementing `qsort` with a custom comparator function (function pointers). | ✅ Completed |
 
 ---
 
@@ -82,6 +83,23 @@ The `typedef` keyword allows you to create an alias for an existing type. While 
 
 > **🕵️‍♂️ Red Team Note:**
 > Typedefs are excellent for **obfuscation**. By renaming common types (or pointers to shellcode) to mundane names like `GraphicsContext` or `PixelData`, you can sometimes confuse simple static analysis or human analysts looking at your code. Hiding the `*` (pointer) inside a typedef makes the data flow harder to track visually.
+
+### 🔄 QuickSort & Function Pointers
+The standard library function `qsort()` demonstrates the power of **Function Pointers**. Instead of writing a sort algorithm from scratch, you pass:
+1.  The array to sort.
+2.  The size of the array.
+3.  The size of each element.
+4.  A pointer to a **comparison function** that defines the sort logic.
+
+#### ⚠️ The `sizeof` Trap
+A common bug when iterating or sorting arrays is using `sizeof(array)` and expecting the element count.
+*   `sizeof(array)`: Returns total **bytes** (e.g., 5 ints * 4 bytes = 20 bytes).
+*   **Correct Count**: `sizeof(array) / sizeof(array[0])`.
+
+> **🕵️‍♂️ Red Team Note:**
+> **Function Pointers** (Callbacks) are a cornerstone of malware development.
+> *   *API Hooking:* You overwrite a function pointer in memory to redirect execution to your malicious code.
+> *   *Indirect Execution:* Instead of calling `VirtualAlloc` directly (which is flagged by AV), you might find a pointer to it in memory and call it dynamically to hide your intent.
 
 ---
 *Notes maintained by [J Brown](https://github.com/J-c0d3-4Fun)*
