@@ -30,7 +30,7 @@ Currently working through advanced concepts required for C2 development.
 
 - **[📁 /beej-guide-to-c-notes](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/)**: Notes and labs from Beej's Guide.
     - *Focus:* Manual memory management, implementing standard library functions, structs.
-    - *Recent Topics:* Function Pointers (Callbacks), `qsort`, Typedef Obfuscation.
+    - *Recent Topics:* Function Pointers, `qsort`, `void*` Pointers, Pointer Arithmetic, `realloc` buffers.
 
 ---
 

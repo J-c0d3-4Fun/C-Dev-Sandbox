@@ -114,6 +114,38 @@ Memory on the **Heap** must be manually managed. This gives you control but also
 > *   **Shellcode Loading:** Standard `malloc` allocates **RW** (Read-Write) memory. To run shellcode, you typically need **RWX** (Read-Write-Execute) memory. In real malware, you'll use OS-specific APIs like `VirtualAlloc` (Windows) or `mmap` (Linux) to control these permissions.
 > *   **Heap Exploitation:** Understanding how `malloc` organizes chunks of memory is the first step to learning **Heap Overflows** and **Use-After-Free** exploits.
 
+### 🌑 Void Pointers (`void *`)
+A `void *` is a "generic" pointer type. It holds a memory address, but C doesn't know what *type* of data is stored there.
+
+*   **The Power**: You can write functions that handle **any data type** (e.g., `memcpy`, `qsort`).
+*   **The Limitation**: You **cannot** dereference (`*p`) or do arithmetic (`p++`) on a void pointer directly because the compiler doesn't know the size of the item.
+*   **The Fix**: You must **cast** it to a specific type (like `char *` for byte-level access) before using it.
+
+### 🏎️ Pointer Arithmetic
+Pointer arithmetic is the underlying mechanism of arrays.
+*   **Formula**: `a[b] == *(a + b)`
+*   **Movement**: Adding `1` to a pointer moves it forward by `sizeof(type)` bytes, not just 1 byte.
+
+> **🕵️‍♂️ Red Team Note:**
+> *   **Scanning Memory**: Pointer arithmetic is how you scan memory for "Egg Hunters" (looking for a specific signature of your shellcode) or parse PE headers in memory to find kernel32.dll.
+> *   **Buffer Overflows**: Understanding that `buf[i]` is just `*(buf + i)` helps visualize how writing past the bounds (`buf[100]` in a size 10 array) literally writes into the *next* variable's memory address.
+
+### 🔢 Data Types & Limits
+Understanding the exact size of data types is critical when crafting payloads or shellcode.
+
+| Type | Typical Size (Bytes) | Range Macro (Min/Max) |
+|:---|:---|:---|
+| `char` | 1 | `CHAR_MIN` / `CHAR_MAX` |
+| `short` | 2 | `SHRT_MIN` / `SHRT_MAX` |
+| `int` | 2 or 4 | `INT_MIN` / `INT_MAX` |
+| `long` | 4 or 8 | `LONG_MIN` / `LONG_MAX` |
+| `long long` | 8 | `LLONG_MIN` / `LLONG_MAX` |
+| `float` | 4 | - |
+| `double` | 8 | - |
+
+*   **Unsigned Variants**: Always start at `0` and go up to `U<TYPE>_MAX` (e.g., `UINT_MAX`).
+*   **Headers**: Use `<limits.h>` for integers and `<float.h>` for floats.
+
 ---
 *Notes maintained by [J Brown](https://github.com/J-c0d3-4Fun)*
 *These notes and labs are adapted from [Beej's Guide](https://beej.us/guide/bgc/) for educational purposes. Code is modified for experimentation.*
