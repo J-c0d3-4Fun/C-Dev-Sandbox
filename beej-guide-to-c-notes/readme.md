@@ -16,6 +16,12 @@ This directory contains my code labs, exercises, and study notes from following 
 | **[`typedef.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/typedef.c)** | Exploring type abstraction, anonymous structs, and pointer obfuscation. | ✅ Completed |
 | **[`quickSort.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/quickSort.c)** | Implementing `qsort` with a custom comparator function (function pointers). | ✅ Completed |
 | **[`manualMemoryAllocation.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/manualMemoryAllocation.c)** | Experiments with manual memory management (`malloc`, `calloc`, `realloc`, `free`). | ✅ Completed |
+| **[`types2.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/types2.c)** | Exploration of integer types, `<limits.h>`, Hex/Octal notation, and ASCII values. | ✅ Completed |
+| **[`types3.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/types3.c)** | String-to-Number conversions (`strtol`, `snprintf`) and Explicit Type Casting. | ✅ Completed |
+| **[`readLinesOfArbitraryLength.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/readLinesOfArbitraryLength.c)** | Building a robust `readLine` function that grows the buffer dynamically with `realloc`. | ✅ Completed |
+| **[`memoryCopy.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/memoryCopy.c)** | Re-implementing `memcpy` using `void*` to copy any data type byte-by-byte. | ✅ Completed |
+| **[`voidPtr.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/voidPtr.c)** | Understanding `void*` (generic pointers) and their limitations (no arithmetic/dereferencing). | ✅ Completed |
+| **[`pointers2arithmetic.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/pointers2arithmetic.c)** | Moving a "cursor" through an array using pointer arithmetic (`*(p+i)`). | ✅ Completed |
 
 ---
 
@@ -146,10 +152,6 @@ Understanding the exact size of data types is critical when crafting payloads or
 *   **Unsigned Variants**: Always start at `0` and go up to `U<TYPE>_MAX` (e.g., `UINT_MAX`).
 *   **Headers**: Use `<limits.h>` for integers and `<float.h>` for floats.
 
-
-
-
-
 ### 🔣 Number Bases & Representation
 In systems programming and exploitation, you rarely work with Base 10.
 1.  **Hexadecimal (`0x`)**: `int x = 0x1A2B;` - Used for memory addresses and machine code.
@@ -175,30 +177,24 @@ When writing constants, you can specify their type explicitly using suffixes (ca
 
 > **Tip:** `double` is the default for floating point numbers (e.g., `3.14`).
 
+### 🔄 Conversions & Casting
+C is strict but flexible. You often need to convert strings (user input) to numbers, or cast one type to another.
 
+#### String ↔️ Number
+1.  **Number to String**: Use `snprintf()` (Safe) instead of `sprintf()` (Unsafe).
+    *   `snprintf(buf, 10, "%f", 3.14);`
+2.  **String to Number**: Use `strtol()` or `strtoul()` instead of `atoi()`.
+    *   **Why?** `atoi()` has undefined behavior on errors. `strtol` allows you to detect invalid characters and specify bases (Base 10, Base 16, etc.).
 
+#### Casting
+You can force a type change by putting `(type)` in front of a variable.
+*   **Implicit**: `float x = 10;` (Int 10 becomes Float 10.0 automatically).
+*   **Explicit**: `int *p = (int *)void_ptr;` (Telling the compiler "I know what I'm doing").
 
-
-
-
-
-Function	Description
-atoi	String to int
-atof	String to float
-atol	String to long int
-atoll	String to long long int
-
-
-Function	Description
-strtol	String to long int
-strtoll	String to long long int
-strtoul	String to unsigned long int
-strtoull	String to unsigned long long int
-strtof	String to float
-strtod	String to double
-strtold	String to long double
-
-
+> **🕵️‍♂️ Red Team Note:**
+> *   **Parsing C2 Configs**: Your malware will often receive a configuration string (e.g., `"192.168.1.50:8080"`). You'll use `strtol` to safely parse the port number.
+> *   **Integer Overflows**: When converting strings to integers, always check boundaries. If an attacker sends a number larger than `INT_MAX`, `atoi` might wrap around, leading to logic bugs or heap overflows (if that number is used for `malloc`).
+> *   **Base 16 parsing**: `strtoul(s, NULL, 16)` is extremely useful for parsing hex strings in shellcode loaders.
 
 ---
 *Notes maintained by [J Brown](https://github.com/J-c0d3-4Fun)*
