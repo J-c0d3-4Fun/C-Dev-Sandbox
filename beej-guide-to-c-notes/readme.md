@@ -18,6 +18,7 @@ This directory contains my code labs, exercises, and study notes from following 
 | **[`manualMemoryAllocation.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/manualMemoryAllocation.c)** | Experiments with manual memory management (`malloc`, `calloc`, `realloc`, `free`). | ✅ Completed |
 | **[`types2.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/types2.c)** | Exploration of integer types, `<limits.h>`, Hex/Octal notation, and ASCII values. | ✅ Completed |
 | **[`types3.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/types3.c)** | String-to-Number conversions (`strtol`, `snprintf`) and Explicit Type Casting. | ✅ Completed |
+| **[`types4.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/types4.c)** | Deep dive into Type Qualifiers (`const`, `volatile`, `restrict`) and Storage Classes (`static`, `extern`). | ✅ Completed |
 | **[`readLinesOfArbitraryLength.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/readLinesOfArbitraryLength.c)** | Building a robust `readLine` function that grows the buffer dynamically with `realloc`. | ✅ Completed |
 | **[`memoryCopy.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/memoryCopy.c)** | Re-implementing `memcpy` using `void*` to copy any data type byte-by-byte. | ✅ Completed |
 | **[`voidPtr.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/voidPtr.c)** | Understanding `void*` (generic pointers) and their limitations (no arithmetic/dereferencing). | ✅ Completed |
@@ -195,6 +196,30 @@ You can force a type change by putting `(type)` in front of a variable.
 > *   **Parsing C2 Configs**: Your malware will often receive a configuration string (e.g., `"192.168.1.50:8080"`). You'll use `strtol` to safely parse the port number.
 > *   **Integer Overflows**: When converting strings to integers, always check boundaries. If an attacker sends a number larger than `INT_MAX`, `atoi` might wrap around, leading to logic bugs or heap overflows (if that number is used for `malloc`).
 > *   **Base 16 parsing**: `strtoul(s, NULL, 16)` is extremely useful for parsing hex strings in shellcode loaders.
+
+### 🔐 Type Qualifiers & Storage Classes
+These keywords tell the compiler *how* and *where* to store variables.
+
+#### 1. `const` (Constant)
+*   **`const int *p`**: I cannot change the **value** pointed to. (Read-only data).
+*   **`int *const p`**: I cannot change the **pointer itself** (it's stuck pointing to that address).
+
+#### 2. `volatile`
+Tells the compiler: *"Don't optimize this variable. Its value might change unexpectedly."*
+*   **Use Case:** Hardware registers, Memory-Mapped I/O, or variables shared between threads.
+
+#### 3. `static`
+*   **Inside Function**: Variable retains value between function calls (initialized once).
+*   **Global (File Scope)**: Variable is **PRIVATE** to this file. It cannot be seen by other `.c` files.
+
+#### 4. `extern`
+Tells the compiler: *"This variable exists, but it's defined in another file."*
+*   **Use Case:** Sharing global configuration structs between different modules of your malware.
+
+> **🕵️‍♂️ Red Team Note:**
+> *   **`volatile` & Evasion**: When writing **Anti-Debugging** loops (e.g., checking `rdtsc` to see if you're being stepped through), you MUST mark variables as `volatile`. If you don't, the compiler might optimize away your check, thinking the variable never changes.
+> *   **`static` & Obfuscation**: Making your helper functions `static` keeps them internal. This shrinks the "Export Table" of your DLL/EXE, giving Reverse Engineers fewer clues (named functions) to work with.
+> *   **`extern`**: Often used in **Rootkits** to hook kernel symbols exported by the OS.
 
 ---
 *Notes maintained by [J Brown](https://github.com/J-c0d3-4Fun)*
