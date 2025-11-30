@@ -30,7 +30,7 @@ Currently working through advanced concepts required for C2 development.
 
 - **[📁 /beej-guide-to-c-notes](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/)**: Notes and labs from Beej's Guide.
     - *Focus:* Manual memory management, implementing standard library functions, structs.
-    - *Recent Topics:* Function Pointers, `qsort`, `void*`, `realloc`, Hex/Octal Notation, `volatile`/`static`, Multi-file compilation.
+    - *Recent Topics:* `qsort`, `void*`, `realloc`, `volatile`/`static`, CLI Args (`argc`/`argv`), Env Vars.
 
 ---
 
