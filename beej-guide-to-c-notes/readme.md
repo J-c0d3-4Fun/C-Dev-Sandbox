@@ -265,6 +265,39 @@ The OS holds key-value pairs (like `PATH`, `USER`, `API_KEY`).
 > *   **Argument Spoofing**: On Linux, you can sometimes overwrite `argv[0]` in memory to change how your process appears in tools like `top` or `ps` (e.g., renaming your malware to `[kworker]`).
 > *   **C2 Flags**: Robust malware often uses arguments to switch modes (e.g., `./implant.exe --install` vs `./implant.exe --inject 1234`).
 
+### 🛠️ The C Preprocessor
+The Preprocessor is a separate step that runs *before* compilation. It modifies the source code text directly.
+
+#### Macros (`#define`)
+*   **Constants**: `#define BUFFER_SIZE 1024` (Replaces all instances with 1024).
+*   **Macros with Arguments**: `#define SQR(x) ((x) * (x))`
+    *   *Warning:* Always wrap arguments in parentheses to avoid precedence bugs.
+*   **Stringification (`#`)**: Turns a macro argument into a string literal.
+*   **Concatenation (`##`)**: Glues two tokens together.
+
+#### Conditional Compilation
+Decide what code gets compiled based on conditions (Platform, Debug Mode, etc.).
+```c
+#ifdef DEBUG
+    printf("Debug mode enabled.\n");
+#endif
+```
+
+#### Built-in Macros
+Useful for logging and debugging.
+*   `__FILE__`: Current file name.
+*   `__LINE__`: Current line number.
+*   `__func__`: Current function name.
+*   `__DATE__` / `__TIME__`: Compilation timestamp.
+
+#### C23 Features (`#embed`)
+*   **`#embed`**: Directly includes a binary file as an array of bytes at compile time.
+*   **Use Case**: Embedding a shellcode payload or a config file directly into the executable without converting it to a hex string manually.
+
+> **🕵️‍♂️ Red Team Note:**
+> *   **Obfuscation**: Macros are heavily used to obfuscate code. You can `#define` standard C keywords to look like garbage or other words to confuse human analysts.
+> *   **Payload Embedding**: The new `#embed` directive is a game-changer for malware dev. You can drop a raw `.bin` shellcode file in your folder and `#embed` it into your loader instantly.
+
 ### ⚡ Optimization: `restrict`
 The `restrict` keyword tells the compiler: *"I promise this pointer is the ONLY way to access this specific memory."*
 *   **Benefit**: Allows aggressive compiler optimizations.
