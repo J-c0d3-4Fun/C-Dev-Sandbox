@@ -19,6 +19,7 @@ This directory contains my code labs, exercises, and study notes from following 
 | **[`types2.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/types2.c)** | Exploration of integer types, `<limits.h>`, Hex/Octal notation, and ASCII values. | ✅ Completed |
 | **[`types3.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/types3.c)** | String-to-Number conversions (`strtol`, `snprintf`) and Explicit Type Casting. | ✅ Completed |
 | **[`types4.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/types4.c)** | Deep dive into Type Qualifiers (`const`, `volatile`, `restrict`) and Storage Classes (`static`, `extern`). | ✅ Completed |
+| **[`structs2.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/structs2.c)** | Advanced Structs: Bit-Fields, Flexible Array Members, Padding, and Unions. | ✅ Completed |
 | **[`multifileProjects.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/multifileProjects.c)** | Organizing code across multiple files, header guards, and object file compilation. | ✅ Completed |
 | **[`theOutsideEnvironment.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/theOutsideEnvironment.c)** | Handling Command Line Arguments (`argc`/`argv`) and Environment Variables (`getenv`). | ✅ Completed |
 | **[`static.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/static.c)** | Demonstrating `static` variables for state persistence within functions. | ✅ Completed |
