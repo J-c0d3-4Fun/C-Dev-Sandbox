@@ -79,7 +79,7 @@
 // union goo{ struct too ta; struct boo ba;};
 
 // Unions and Unnamed Structs
-// can use unnamed strcuts in unions
+// can use unnamed structs in unions
 
 // Passing and Returning struct and union
 // You can pass a struct or union to a function by value (as opposed to a pointer to it)

@@ -30,7 +30,7 @@ Currently working through advanced concepts required for C2 development.
 
 - **[📁 /beej-guide-to-c-notes](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/)**: Notes and labs from Beej's Guide.
     - *Focus:* Manual memory management, implementing standard library functions, structs.
-    - *Recent Topics:* `qsort`, `void*`, `realloc`, CLI Args, Preprocessor, Bit-Fields, Unions.
+    - *Recent Topics:* `qsort`, `void*`, CLI Args, Preprocessor, Bit-Fields, Unions, Enums, Flexible Arrays.
 
 ---
 

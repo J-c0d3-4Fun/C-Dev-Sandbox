@@ -19,6 +19,9 @@ This directory contains my code labs, exercises, and study notes from following 
 | **[`types2.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/types2.c)** | Exploration of integer types, `<limits.h>`, Hex/Octal notation, and ASCII values. | ✅ Completed |
 | **[`types3.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/types3.c)** | String-to-Number conversions (`strtol`, `snprintf`) and Explicit Type Casting. | ✅ Completed |
 | **[`types4.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/types4.c)** | Deep dive into Type Qualifiers (`const`, `volatile`, `restrict`) and Storage Classes (`static`, `extern`). | ✅ Completed |
+| **[`enumeratedTypes.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/enumeratedTypes.c)** | Using `enum` to create symbolic integer constants and self-documenting code. | ✅ Completed |
+| **[`Charcters&Strings2.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/Charcters&Strings2.c)** | Escape sequences, Numeric Escapes (Octal/Hex), and Unicode support. | ✅ Completed |
+| **[`flexibleArrayMembers.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/flexibleArrayMembers.c)** | Implementing "Flexible Array Members" to create variable-length structs. | ✅ Completed |
 | **[`structs2.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/structs2.c)** | Advanced Structs: Bit-Fields, Flexible Array Members, Padding, and Unions. | ✅ Completed |
 | **[`multifileProjects.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/multifileProjects.c)** | Organizing code across multiple files, header guards, and object file compilation. | ✅ Completed |
 | **[`theOutsideEnvironment.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/theOutsideEnvironment.c)** | Handling Command Line Arguments (`argc`/`argv`) and Environment Variables (`getenv`). | ✅ Completed |
@@ -299,11 +302,44 @@ Useful for logging and debugging.
 > *   **Obfuscation**: Macros are heavily used to obfuscate code. You can `#define` standard C keywords to look like garbage or other words to confuse human analysts.
 > *   **Payload Embedding**: The new `#embed` directive is a game-changer for malware dev. You can drop a raw `.bin` shellcode file in your folder and `#embed` it into your loader instantly.
 
+### 🔢 Enumerated Types (`enum`)
+Enums allow you to define named integer constants.
+*   **Better than `#define`**: Enums have a type, are scoped, and are easier to debug (debuggers show the name `HORSE` instead of `0`).
+*   **Auto-Increment**: Values start at 0 and increment by 1 unless specified.
+    ```c
+    enum { SNAKE=0, DOG=4, CAT }; // CAT will be 5
+    ```
+
+> **🕵️‍♂️ Red Team Note:**
+> *   **State Machines**: Enums are perfect for tracking the state of a C2 implant (e.g., `enum state { IDLE, CONNECTING, RECEIVING_TASK, EXECUTING }`).
+> *   **Protocol Parsing**: Use enums to define protocol opcodes (e.g., `enum op { OP_SHELL=0x01, OP_UPLOAD=0x02 }`) to make your packet parsing logic readable.
+
+### 🔡 Characters & Escape Sequences
+*   **Standard Escapes**: `\n` (newline), `\t` (tab), `\r` (carriage return).
+*   **Numeric Escapes**:
+    *   `\102` (Octal) -> 'B'
+    *   `\x41` (Hex) -> 'A'
+    *   `\u2022` (Unicode 16-bit) -> '•'
+
+> **🕵️‍♂️ Red Team Note:**
+> *   **Shellcode Strings**: You will often see shellcode strings written using hex escapes: `char shellcode[] = "\x90\x90\xeb\xfe";`.
+> *   **Obfuscation**: Malicious strings can be hidden from basic `strings` analysis by breaking them up with escape sequences or mixing octal/hex representation.
+
+### 🏗️ Advanced Structs: Flexible Array Members
+Sometimes you need a struct that can hold a variable amount of data (like a network packet with a variable payload).
+*   **Old Way**: `struct packet { int len; char *data; }` (Requires 2 mallocs, pointer chasing).
+*   **New Way (Flexible Array)**: `struct packet { int len; char data[]; }`
+    *   The array has **no size** in the struct definition.
+    *   You allocate memory for the struct **PLUS** the size of the array in one go.
+    *   `struct packet *p = malloc(sizeof(struct packet) + payload_size);`
+
+> **🕵️‍♂️ Red Team Note:**
+> This pattern is extremely common in **Windows Kernel** structures and network protocols. Recognizing `char data[]` at the end of a struct is key when reverse engineering custom Command & Control protocols.
+
 ### ⚡ Optimization: `restrict`
 The `restrict` keyword tells the compiler: *"I promise this pointer is the ONLY way to access this specific memory."*
 *   **Benefit**: Allows aggressive compiler optimizations.
 *   **Risk**: If you lie (alias two restricted pointers to the same address), you get **Undefined Behavior**.
-
 ---
 *Notes maintained by [J Brown](https://github.com/J-c0d3-4Fun)*
 *These notes and labs are adapted from [Beej's Guide](https://beej.us/guide/bgc/) for educational purposes. Code is modified for experimentation.*
