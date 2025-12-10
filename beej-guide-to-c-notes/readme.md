@@ -36,6 +36,8 @@ This directory contains my code labs, exercises, and study notes from following 
 | **[`unicode.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/unicode.c)** | Working with Unicode code points, wide characters (`wchar_t`), and the `L` prefix. | ✅ Completed |
 | **[`convertMultibyteToWideChar.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/convertMultibyteToWideChar.c)** | Converting between multibyte strings and wide character strings using `mbstowcs()`. | ✅ Completed |
 | **[`exits.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/exits.c)** | Program termination with `exit()`, `atexit()` handlers, `_Exit()`, `abort()`, and `assert()`. | ✅ Completed |
+| **[`arrays2.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/arrays2.c)** | Advanced array topics: type qualifiers in parameters, `static` for minimum size, and 2D arrays. | ✅ Completed |
+| **[`LongJumps.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-c-notes/LongJumps.c)** | Non-local jumps with `setjmp()` and `longjmp()` for advanced control flow. | ✅ Completed |
 
 ---
 
@@ -508,6 +510,82 @@ assert(ptr != NULL);  // Crashes if ptr is NULL
 > *   **Anti-Analysis**: Malware might use `_Exit()` or `abort()` to terminate immediately if it detects a debugger or sandbox, preventing analysis.
 > *   **Persistence Cleanup**: An `atexit()` handler could be used to remove artifacts (registry keys, dropped files) if the implant exits gracefully.
 > *   **Debug Builds**: Use `assert()` liberally during development but compile with `-DNDEBUG` for release builds to remove all assertions.
+
+### 📚 Advanced Arrays
+Beyond basic array usage, C offers several advanced features for working with arrays in function parameters.
+
+#### Type Qualifiers in Array Parameters
+Array notation in parameters is equivalent to pointer notation, but you can add qualifiers inside the brackets:
+```c
+int func(int *const p);           // Pointer notation
+int func(int p[const]);           // Array notation (equivalent)
+int func(int p[const volatile 10]); // With size hint
+```
+
+#### `static` for Minimum Array Size
+The `static` keyword in array parameters tells the compiler the array will have *at least* that many elements:
+```c
+int func(int p[static 4]);  // Expects at least 4 elements
+```
+*   Allows compiler optimizations.
+*   Passing a smaller array is **undefined behavior**.
+
+#### Partial Initialization
+If you partially initialize an array, remaining elements are set to `0`:
+```c
+int arr[5] = {1, 2};  // arr = {1, 2, 0, 0, 0}
+```
+
+> **🕵️‍♂️ Red Team Note:**
+> *   **Buffer Size Contracts**: Using `static` in array parameters documents the expected buffer size—useful when writing shellcode loaders or encryption routines that require fixed-size blocks.
+> *   **Zero Initialization**: Partial initialization is useful for zeroing out buffers (e.g., `char buf[256] = {0};`) before use to avoid leaking stack data.
+
+### 🦘 Long Jumps (`setjmp` / `longjmp`)
+A mechanism for **non-local jumps**—jumping out of deeply nested function calls back to a saved point.
+
+#### How It Works:
+1.  **`setjmp(env)`**: Saves the current execution state (stack, registers) into `env`. Returns `0` on initial call.
+2.  **`longjmp(env, val)`**: Restores the state saved in `env`. Execution resumes at `setjmp()`, which now returns `val`.
+
+#### Key Types & Headers:
+*   Include `<setjmp.h>`
+*   `jmp_buf`: Opaque type that stores the saved state.
+
+**Example:**
+```c
+#include <setjmp.h>
+jmp_buf env;
+
+void deep_function(void) {
+    longjmp(env, 42);  // Jump back!
+}
+
+int main(void) {
+    if (setjmp(env) == 0) {
+        printf("First time\n");
+        deep_function();
+    } else {
+        printf("Returned via longjmp\n");
+    }
+}
+```
+
+#### ⚠️ Critical Rule: `volatile` for Local Variables
+If you want local variables in the `setjmp()` function to retain their values after a `longjmp()`, they **must** be declared `volatile`:
+```c
+volatile int x = 10;
+if (setjmp(env) == 0) {
+    x = 20;  // This change persists after longjmp
+}
+```
+
+> **🕵️‍♂️ Red Team Note:**
+> *   **Exception Handling**: `setjmp`/`longjmp` is C's primitive form of exception handling. It's used in some C2 frameworks to recover from errors deep in the call stack without unwinding manually.
+> *   **Anti-Debugging**: Some malware uses `longjmp` to confuse debuggers and static analysis tools by creating non-linear control flow that's hard to trace.
+> *   **Structured Exception Handling (SEH)**: On Windows, SEH is built on similar concepts. Understanding `setjmp`/`longjmp` helps when reverse engineering Windows malware that abuses SEH for anti-analysis.
+
+
+
 
 ---
 *Notes maintained by [J Brown](https://github.com/J-c0d3-4Fun)*
