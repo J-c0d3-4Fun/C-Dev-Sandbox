@@ -585,6 +585,11 @@ if (setjmp(env) == 0) {
 > *   **Structured Exception Handling (SEH)**: On Windows, SEH is built on similar concepts. Understanding `setjmp`/`longjmp` helps when reverse engineering Windows malware that abuses SEH for anti-analysis.
 
 
+### ⏰ Date & Time (`<time.h>`)
+C provides the `struct tm` for working with broken-down time (human-readable date/time components).
+
+#### The `struct tm` Structure
+```c
 struct tm {
     int tm_sec;    // seconds after the minute -- [0, 60]
     int tm_min;    // minutes after the hour -- [0, 59]
@@ -596,6 +601,20 @@ struct tm {
     int tm_yday;   // days since January 1 -- [0, 365]
     int tm_isdst;  // Daylight Saving Time flag
 };
+```
+
+#### Key Functions
+| Function | Description |
+|:---|:---|
+| `time(NULL)` | Get current time as `time_t` (seconds since epoch). |
+| `localtime(&time_t)` | Convert `time_t` to `struct tm` (local timezone). |
+| `gmtime(&time_t)` | Convert `time_t` to `struct tm` (UTC). |
+| `mktime(&tm)` | Convert `struct tm` back to `time_t`. |
+| `strftime(buf, size, fmt, &tm)` | Format time as a string. |
+
+> **🕵️‍♂️ Red Team Note:**
+> *   **Timestomping**: Malware often manipulates file timestamps to blend in. Understanding `struct tm` and `mktime()` is essential for crafting fake timestamps.
+> *   **C2 Beaconing**: Time functions are used to implement sleep jitter and scheduled check-ins to avoid detection patterns.
 
 ---
 *Notes maintained by [J Brown](https://github.com/J-c0d3-4Fun)*
