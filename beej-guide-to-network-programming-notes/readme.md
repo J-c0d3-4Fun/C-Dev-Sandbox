@@ -11,7 +11,8 @@ This directory contains my code labs, exercises, and study notes from following 
 
 | Exercise | Description | Status |
 |:---|:---|:---|
-| **[`sockets.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-network-programming-notes/sockets.c)** | Socket fundamentals: SOCK_STREAM vs SOCK_DGRAM, TCP vs UDP concepts. | 🟡 In Progress |
+| **[`sockets.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-network-programming-notes/sockets.c)** | Socket fundamentals: SOCK_STREAM vs SOCK_DGRAM, TCP vs UDP concepts. | ✅ Completed |
+| **[`IPaddrsStructsDataMunging.c`](file:///Users/jbrown/C-Dev-Sandbox/beej-guide-to-network-programming-notes/IPaddrsStructsDataMunging.c)** | IP addresses, socket structs, byte order, and `inet_pton()`. | 🟡 In Progress |
 
 ---
 
@@ -81,6 +82,135 @@ Encapsulate the packet in the method of your choosing and `sendto()` it out.
 
 > **🕵️‍♂️ Red Team Note:**
 > Understanding encapsulation lets you design custom C2 protocols. You control what goes in the application layer—use it for encryption, compression, or mimicking legitimate traffic.
+
+---
+
+### 🌐 IP Addresses & Loopback
+
+#### Loopback Addresses
+| Version | Address | Description |
+|:---|:---|:---|
+| IPv4 | `127.0.0.1` | Localhost |
+| IPv6 | `::1` | Localhost |
+
+#### Port Numbers
+A port number is a **16-bit number** that acts like a local address for the connection. It identifies which application/service should receive the data.
+
+---
+
+### 🔄 Byte Order: Host vs Network
+
+| Type | Description |
+|:---|:---|
+| **Network Byte Order** | Big-Endian—stores the "big end" (most significant byte) first. This is the standard for network protocols. |
+| **Host Byte Order** | Whatever your computer uses internally (often Little-Endian on x86). |
+
+#### Conversion Functions
+You can convert `short` (2 bytes) and `long` (4 bytes) between host and network order:
+
+| Function | Description |
+|:---|:---|
+| `htons()` | Host to Network Short |
+| `htonl()` | Host to Network Long |
+| `ntohs()` | Network to Host Short |
+| `ntohl()` | Network to Host Long |
+
+> **🕵️‍♂️ Red Team Note:**
+> Forgetting byte order conversion is a classic bug. Your implant connects to the wrong port, packets get malformed, and you waste hours debugging. Always use `htons()` for ports!
+
+---
+
+### 🏗️ Socket Structs
+
+A socket descriptor is of type `int`.
+
+#### `struct addrinfo`
+Used for host name lookups and service name lookups (DNS).
+```c
+struct addrinfo {
+    int ai_flags;             // AI_PASSIVE, AI_CANONNAME, etc.
+    int ai_family;            // AF_INET, AF_INET6, AF_UNSPEC
+    int ai_socktype;          // SOCK_STREAM, SOCK_DGRAM
+    int ai_protocol;          // use 0 for "any"
+    size_t ai_addrlen;        // size of ai_addr in bytes
+    struct sockaddr *ai_addr; // struct sockaddr_in or _in6
+    char *ai_canonname;       // full canonical hostname
+    struct addrinfo *ai_next; // linked list, next node
+};
+```
+
+#### `struct sockaddr`
+Generic struct that holds socket address information for many types of sockets.
+```c
+struct sockaddr {
+    unsigned short sa_family; // address family, AF_xxx
+    char sa_data[14];         // 14 bytes of protocol address
+};
+```
+
+#### `struct sockaddr_in` (IPv4)
+**Important:** A pointer to `struct sockaddr_in` can be cast to a pointer to `struct sockaddr` and vice-versa. This makes it easy to reference elements of the socket address.
+```c
+struct sockaddr_in {
+    short int sin_family;         // Address family, AF_INET
+    unsigned short int sin_port;  // Port number
+    struct in_addr sin_addr;      // Internet address
+    unsigned char sin_zero[8];    // Padding—same size as struct sockaddr
+};
+
+struct in_addr {
+    uint32_t s_addr;  // 32-bit int (4 bytes)
+};
+```
+
+#### `struct sockaddr_in6` (IPv6)
+```c
+struct sockaddr_in6 {
+    u_int16_t sin6_family;     // AF_INET6
+    u_int16_t sin6_port;       // Port, Network Byte Order
+    u_int32_t sin6_flowinfo;   // IPv6 flow information
+    struct in6_addr sin6_addr; // IPv6 address
+    u_int32_t sin6_scope_id;   // Scope ID
+};
+
+struct in6_addr {
+    uint8_t s6_addr[16];  // 128 bits (16 bytes)
+};
+```
+
+#### `struct sockaddr_storage`
+Designed to be large enough to hold both IPv4 and IPv6 structures. Use this when you don't know ahead of time which address family you'll be dealing with.
+```c
+struct sockaddr_storage {
+    sa_family_t ss_family;  // address family
+    // padding and alignment...
+};
+```
+
+> **🕵️‍♂️ Red Team Note:**
+> *   **Casting Trick**: The ability to cast between `sockaddr_in` and `sockaddr` is how all socket functions work. You fill in the specific struct, then cast it to the generic type.
+> *   **IPv6 Evasion**: Many security tools still focus on IPv4. Using `sockaddr_in6` for C2 can sometimes bypass monitoring.
+
+---
+
+### 🔀 `inet_pton()` - Presentation to Network
+Converts an IP address from human-readable string ("numbers-and-dots") notation into binary form.
+
+```c
+struct sockaddr_in sa;
+inet_pton(AF_INET, "10.10.10.1", &(sa.sin_addr));
+```
+
+| Function | Description |
+|:---|:---|
+| `inet_pton(AF, src, dst)` | String → Binary (e.g., "192.168.1.1" → bytes) |
+| `inet_ntop(AF, src, dst, size)` | Binary → String (the reverse) |
+
+> **🕵️‍♂️ Red Team Note:**
+> *   **Hardcoded IPs**: Using `inet_pton()` lets you embed C2 server IPs directly in your implant without DNS lookups—reduces network IOCs.
+> *   **Dynamic Config**: Parse IP strings from config files or environment variables at runtime for flexibility.
+
+
 
 ---
 
