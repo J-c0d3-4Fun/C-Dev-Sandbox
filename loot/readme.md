@@ -13,7 +13,7 @@ This directory contains projects built while learning. Each project applies conc
 | Project | Description | Concepts Used | Status |
 |:---|:---|:---|:---|
 | **[`simpleHttpServer.c`](simpleHttpServer.c)** | TCP server that accepts connections, receives commands, and sends responses. Graceful shutdown via signal handling. | Sockets, `bind()`, `listen()`, `accept()`, `recv()`, `send()`, signal handlers | 🟡 In Progress |
-| **[`http.c`](http.c)** | HTTP experimentation | HTTP protocol basics | 🟡 In Progress |
+
 
 ---
 
