@@ -25,10 +25,10 @@ I'm building toward becoming a **Red Team Engineer**. This repository documents 
 | **[`/beej-guide-to-network-programming-notes`](beej-guide-to-network-programming-notes/)** | 📝 Study notes from Beej's Network Programming Guide |
 | **[`/learning`](learning/)** | 📖 Early learning exercises and concept practice |
 
-## 🚀 Current Focus (Phase 3)
+## 🚀 Current Focus (Phase 4)
 
-- **[Beej's Guide to Network Programming](https://beej.us/guide/bgnet/html/split/)** — Sockets, TCP/UDP, client/server
-- **[eJPT Certification](https://security.ine.com/certifications/ejpt-certification/)** — Foundational pentesting
+- **[CRTP (Certified Red Team Professional)](https://www.alteredsecurity.com/adlab)** — Active Directory attacks, Windows exploitation, lateral movement
+- **[CARTS (AWS Cloud Red Team Specialist)](https://cyberwarfare.live/product/aws-cloud-red-team-specialist-carts/)** — Cloud security & AWS red teaming
 
 ## 📈 Progress Tracker
 
@@ -36,9 +36,10 @@ I'm building toward becoming a **Red Team Engineer**. This repository documents 
 |:---|:---|:---|
 | Phase 1 | C Foundations (syntax, data structures, file I/O) | ✅ Completed |
 | Phase 2 | Memory & Pointers (malloc, structs, pointer arithmetic) | ✅ Completed |
-| Phase 3 | Network Programming & Certs | 🟡 In Progress |
-| Phase 4 | Malware Development (Sektor7, Maldev Academy) | ⚪ Planned |
-| Phase 5 | Windows Internals & C2 Development | ⚪ Planned |
+| Phase 3 | Network Programming & eJPT | ✅ Completed |
+| Phase 4 | Windows & AD Deep Dive (CRTP) | 🟡 In Progress |
+| Phase 5 | Malware Development (Sektor7, Maldev Academy) | ⚪ Planned |
+| Phase 6 | C2 Framework Development | ⚪ Planned |
 
 ## 🗺️ Learning Resources
 
