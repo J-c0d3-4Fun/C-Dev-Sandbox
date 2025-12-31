@@ -53,9 +53,9 @@ I'm building toward becoming a **Red Team Engineer**. This repository documents 
 ### 🎓 Certifications
 | Certification | Provider | Status |
 |:---|:---|:---|
-| [eJPT](https://security.ine.com/certifications/ejpt-certification/) | INE Security | 🟡 In Progress |
+| [eJPT](https://security.ine.com/certifications/ejpt-certification/) | INE Security | ✅ Completed |
 | [CARTS](https://cyberwarfare.live/product/aws-cloud-red-team-specialist-carts/) | CyberWarfare Labs | 🟡 In Progress |
-| [CRTP](https://www.alteredsecurity.com/adlab) | Altered Security | ⚪ Backlog |
+| [CRTP](https://www.alteredsecurity.com/adlab) | Altered Security | 🟡 In Progress |
 | [CCPE-AWS](https://pentestingexams.com/product/certified-cloud-pentesting-expert/) | Pentesting Exams | ⚪ Backlog |
 | OSCP | OffSec | ⚪ Backlog |
 
