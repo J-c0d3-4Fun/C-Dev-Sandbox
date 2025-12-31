@@ -46,7 +46,7 @@ I'm building toward becoming a **Red Team Engineer**. This repository documents 
 | Resource | Status |
 |:---|:---|
 | [Beej's Guide to C Programming](https://beej.us/guide/bgc/) | ✅ Completed |
-| [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/) | 🟡 In Progress |
+| [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/) | ✅ Completed |
 | The C Programming Language (K&R) | ⚪ Backlog |
 | Hacking: The Art of Exploitation | ⚪ Backlog |
 
