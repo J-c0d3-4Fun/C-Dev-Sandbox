@@ -106,6 +106,28 @@ Function Get-ADComputersTestConnection {
 }
 ```
 
+#### `ForEach` vs `ForEach-Object`
+
+An important distinction in the script above—`ForEach-Object` is a **pipeline cmdlet**, not the same as a `foreach` loop.
+
+| | `foreach` (Statement) | `ForEach-Object` (Cmdlet) |
+|:---|:---|:---|
+| **Context** | Standalone loop | Used inside a pipeline |
+| **Syntax** | `foreach ($item in $collection) { }` | `... | ForEach-Object { }` |
+| **Variable** | You define one (e.g., `$item`) | Uses `$_` (current pipeline object) |
+| **Aliases** | — | `%`, `foreach` (confusingly) |
+
+When working inside a pipeline, use `ForEach-Object`. It processes each object as it arrives—no need to create a variable to store results or a placeholder. The code stays compact:
+
+```powershell
+# ForEach-Object in a pipeline — processes each AD computer as it comes through
+([adsisearcher]"objectcategory=computer").findall() | ForEach-Object {
+    ([adsi]$_.path).cn
+}
+```
+
+> **Source:** [Query AD and Ping Each Computer in the Domain](https://devblogs.microsoft.com/scripting/query-active-directory-and-ping-each-computer-in-the-domain-by-using-powershell/)
+
 ---
 
 *Burned scripts get caught. Native tooling blends in.* 🕵️
