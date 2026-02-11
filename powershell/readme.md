@@ -41,7 +41,7 @@ Only `sAMAccountName`, `displayName`, and `lastLogon` are returned—no noise, f
 
 | Script | Description | Status |
 |:---|:---|:---|
-| **[`adsisearcher.ps1`](adsisearcher.ps1)** | AD enumeration using native `[adsisearcher]` | 🟡 In Progress |
+| **[`adsiwrapper.ps1`](adsiwrapper.ps1)** | Wrapper functions for AD enumeration (users, computers) via `[adsisearcher]` | 🟡 In Progress |
 
 ---
 
@@ -127,6 +127,51 @@ When working inside a pipeline, use `ForEach-Object`. It processes each object a
 ```
 
 > **Source:** [Query AD and Ping Each Computer in the Domain](https://devblogs.microsoft.com/scripting/query-active-directory-and-ping-each-computer-in-the-domain-by-using-powershell/)
+
+#### The `%` Alias
+
+`%` is shorthand for `ForEach-Object`. You'll see it often in one-liners:
+
+```powershell
+# These are equivalent:
+$result | ForEach-Object { $_.Properties }
+$result | %{ $_.Properties }
+```
+
+> **Source:** [StackOverflow — What does % mean in PowerShell?](https://stackoverflow.com/questions/3494115/what-does-mean-in-powershell)
+
+---
+
+### 🧑‍💻 AD User Properties
+
+In my wrapper script, I reference the properties of Users and Computers returned by `[adsisearcher]`. For context, here's what a full AD user object looks like using the traditional [`Get-ADUser`](https://learn.microsoft.com/en-us/powershell/module/activedirectory/get-aduser?view=windowsserver2025-ps) cmdlet:
+
+```powershell
+Get-ADUser -Identity ChewDavid -Properties *
+```
+
+```
+Surname           : David
+Name              : Chew David
+UserPrincipalName :
+GivenName         : David
+Enabled           : False
+SamAccountName    : ChewDavid
+ObjectClass       : user
+SID               : S-1-5-21-2889043008-4136710315-2444824263-3544
+ObjectGUID        : e1418d64-096c-4cb0-b903-ebb66562d99d
+DistinguishedName : CN=Chew David,OU=NorthAmerica,OU=Sales,OU=UserAccounts,DC=FABRIKAM,DC=COM
+```
+
+The `-Properties *` flag retrieves all attributes from the server, not just the default set. With `[adsisearcher]`, you get the same data but through LDAP directly—no Active Directory module required, no signature to flag.
+
+---
+
+### 📺 Video Resources
+
+| Video | Topic |
+|:---|:---|
+| **[$_ and $PSItem Explained](https://www.youtube.com/watch?v=DPFesjjzbkA&t=8s)** | Understanding the pipeline variable and how `$_` / `$PSItem` work in `ForEach-Object` |
 
 ---
 
