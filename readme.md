@@ -21,9 +21,7 @@ I'm building toward becoming a **Red Team Engineer**. This repository documents 
 | Directory | Purpose |
 |:---|:---|
 | **[`/loot`](loot/)** | 🏆 **Projects & Tools** — Working code that demonstrates skill progression |
-| **[`/beej-guide-to-c-notes`](beej-guide-to-c-notes/)** | 📝 Study notes from Beej's Guide to C |
-| **[`/beej-guide-to-network-programming-notes`](beej-guide-to-network-programming-notes/)** | 📝 Study notes from Beej's Network Programming Guide |
-| **[`/learning`](learning/)** | 📖 Early learning exercises and concept practice |
+| **[`/learning`](learning/)** | 📖 **Study Materials** — Notes, exercises, and educational resources organized by topic |
 
 ## 🚀 Current Focus (Phase 4)
 
@@ -41,35 +39,6 @@ I'm building toward becoming a **Red Team Engineer**. This repository documents 
 | Phase 5 | Malware Development (Sektor7, Maldev Academy) | ⚪ Planned |
 | Phase 6 | C2 Framework Development | ⚪ Planned |
 
-## 🗺️ Learning Resources
-
-### 📚 Books & Guides
-| Resource | Status |
-|:---|:---|
-| [Beej's Guide to C Programming](https://beej.us/guide/bgc/) | ✅ Completed |
-| [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/) | ✅ Completed |
-| The C Programming Language (K&R) | ⚪ Backlog |
-| Hacking: The Art of Exploitation | ⚪ Backlog |
-
-### 🎓 Certifications
-| Certification | Provider | Status |
-|:---|:---|:---|
-| [eJPT](https://security.ine.com/certifications/ejpt-certification/) | INE Security | ✅ Completed |
-| [CARTS](https://cyberwarfare.live/product/aws-cloud-red-team-specialist-carts/) | CyberWarfare Labs | 🟡 In Progress |
-| [CRTP](https://www.alteredsecurity.com/adlab) | Altered Security | 🟡 In Progress |
-| [CCPE-AWS](https://pentestingexams.com/product/certified-cloud-pentesting-expert/) | Pentesting Exams | ⚪ Backlog |
-| OSCP | OffSec | ⚪ Backlog |
-
-### 📺 Courses
-| Course | Status |
-|:---|:---|
-| [C Programming Full Course](https://www.youtube.com/watch?v=KJgsSFOSQv0) (FreeCodeCamp) | ✅ Completed |
-| [Kloudle AWS Security Masterclass](https://kloudle.com/masterclass/) | 🟡 In Progress |
-| [Malware Development Essentials](https://institute.sektor7.net/) (Sektor7) | ⚪ Planned |
-| [Maldev Academy](https://maldevacademy.com/) | ⚪ Planned |
-
----
-
 ## 💻 Quick Start
 
 ```bash
@@ -79,6 +48,28 @@ clang filename.c -o output_name
 # Run
 ./output_name
 ```
+
+---
+
+## 🗺️ Learning Resources
+
+**Detailed study materials are organized in [`/learning`](learning/).** See subdirectories for:
+- **C Programming** — Beej's guides with comprehensive notes and labs
+- **Windows & Active Directory** — CRTP fundamentals and tradecraft
+
+### 🎓 Certifications & Courses
+
+| Item | Provider | Status |
+|:---|:---|:---|
+| [eJPT](https://security.ine.com/certifications/ejpt-certification/) | INE Security | ✅ Completed |
+| [CARTS](https://cyberwarfare.live/product/aws-cloud-red-team-specialist-carts/) | CyberWarfare Labs | 🟡 In Progress |
+| [CRTP](https://www.alteredsecurity.com/adlab) | Altered Security | 🟡 In Progress |
+| [CCPE-AWS](https://pentestingexams.com/product/certified-cloud-pentesting-expert/) | Pentesting Exams | ⚪ Backlog |
+| [C Programming Full Course](https://www.youtube.com/watch?v=KJgsSFOSQv0) (FreeCodeCamp) | YouTube | ✅ Completed |
+| [Kloudle AWS Security Masterclass](https://kloudle.com/masterclass/) | Kloudle | 🟡 In Progress |
+| [Malware Development Essentials](https://institute.sektor7.net/) (Sektor7) | Sektor7 | ⚪ Planned |
+| [Maldev Academy](https://maldevacademy.com/) | Maldev Academy | ⚪ Planned |
+| OSCP | OffSec | ⚪ Backlog |
 
 ---
 
