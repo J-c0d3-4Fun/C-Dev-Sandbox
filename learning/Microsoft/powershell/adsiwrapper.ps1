@@ -14,7 +14,8 @@ function Get-DomainUsers {
     } else {
         try{
         $result = ([adsisearcher]"objectcategory=user").findall()
-        $result | %{$_.Properties}
+        $result | %{$_.Properties} 
+        
         }
         catch{
              Write-Error "[Error]: Unable to Find Users!" 
