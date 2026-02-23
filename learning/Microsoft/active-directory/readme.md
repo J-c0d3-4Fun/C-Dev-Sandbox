@@ -1,6 +1,6 @@
-# Active Directory Enumeration: A Systematic Detour
+# Active Directory Fundamentals & Exploitation
 
-This document outlines a structured approach to mastering Active Directory enumeration and Windows misconfiguration exploitation—essential foundations for advanced security assessments.
+This directory contains foundational knowledge and practical walkthroughs for Active Directory enumeration, exploitation, and Windows security tradecraft.
 
 ## The Problem
 
@@ -20,10 +20,10 @@ The solution is not more tools—it's deeper understanding of the configurations
 **Objective:** Build mental models of what AD actually is.
 
 **Activities:**
-- Watch: Professor Messer's "Active Directory Basics" (YouTube, ~30 min)
+- Watch: Professor Messer's "Active Directory Basics" (YouTube, ~30 min) ✅
 - Read: Microsoft documentation on AD fundamentals
-  - Organizational Units (OUs)
-  - Group Policy Objects (GPOs)
+  - Organizational Units (OUs) ✅
+  - Group Policy Objects (GPOs) ✅
   - Delegation and trust relationships
   - User and group permissions
 
@@ -203,6 +203,28 @@ reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
 
 ---
 
-## Next Steps
+## Study Materials
 
-Start with Phase 1. Don't skip it. Understanding how AD works is the foundation for everything that follows.
+### Fundamentals
+- **[Lay of the Land](layOfTheLand.md)** — AD architecture, Group Policy, credentials, and native tools
+- **[AD Certificate Services](ad-certificate-services.md)** — AD CS attack surface, misconfigurations, and exploitation
+
+### Box Walkthroughs
+- **[Sauna](sauna-walkthrough.md)** — AD enumeration, AS-REP roasting, hands-on exploitation
+- **[Box Practice List](boxes-to-lab.md)** — Curated list of machines organized by topic and difficulty
+
+### PowerShell & Windows
+- See `/powershell/` for native Windows tooling and enumeration techniques
+
+---
+
+## Progression
+
+1. **Fundamentals First** — Understand AD architecture (Lay of the Land)
+2. **First Box** — Sauna (enumeration + AS-REP roasting)
+3. **Systematic Progression** — Follow boxes-to-lab.md by topic
+4. **Deep Dives** — Delegation, certificate services, trust relationships as you encounter them
+
+---
+
+*Build understanding through hands-on practice. Theory + labs = mastery.*
