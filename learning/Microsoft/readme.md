@@ -4,12 +4,17 @@ This section focuses on Windows system internals, Active Directory exploitation,
 
 ## Contents
 
-### 🛡️ [Active Directory Enumeration Detour](active-directory/)
-A systematic learning path for mastering Active Directory:
-- Enumeration fundamentals and tools
-- Common misconfigurations and exploitation
-- Manual enumeration techniques
-- Resources and structured progression
+### 🛡️ [Active Directory Fundamentals & Exploitation](active-directory/)
+
+**Current Progress:** Working through hands-on boxes (Sauna ✅ → Heist ✅ → Timelapse 🟡)
+
+Covers:
+- Enumeration fundamentals (LDAP, SMB, RID brute force)
+- AS-REP roasting (pre-auth disabled)
+- Credential extraction (config files, process memory, hashes)
+- Kerberos delegation attacks (RBCD, constrained, unconstrained)
+- AD Certificate Services misconfigurations
+- Manual exploitation techniques with minimal tool reliance
 
 ### 🪟 [Windows Tradecraft & PowerShell](powershell/)
 Deep dives into native Windows tooling:

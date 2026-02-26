@@ -15,6 +15,18 @@ This directory contains all study notes, exercises, and educational resources or
   - PowerShell and Windows native tooling
   - Misconfiguration detection and exploitation
 
+## Current Focus
+
+**Active Directory & Windows Exploitation** — Building hands-on skills through systematic box progression:
+- Enumeration & initial access (AS-REP roasting)
+- Post-exploitation & credential dumping (process memory, hash extraction)
+- Privilege escalation via delegation attacks (RBCD, constrained, unconstrained)
+- Next: AD Certificate Services misconfigurations
+
+**Boxes:** Sauna ✅ → Heist ✅ → Timelapse 🟡 → Cascade ⚪ → Escape ⚪
+
+---
+
 ## Navigation
 
 All materials here are primarily for **understanding concepts**. Once you've learned and can apply knowledge, move code to `/loot` for demonstration of skill.
