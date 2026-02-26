@@ -210,7 +210,9 @@ reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
 - **[AD Certificate Services](ad-certificate-services.md)** — AD CS attack surface, misconfigurations, and exploitation
 
 ### Box Walkthroughs
-- **[Sauna](sauna-walkthrough.md)** — AD enumeration, AS-REP roasting, hands-on exploitation
+- **[Sauna](sauna-walkthrough.md)** — AD enumeration, AS-REP roasting (pre-auth disabled exploitation)
+- **[Heist](heist-walkthrough.md)** — Cisco Type 7 hash cracking, process memory dumping, RBCD escalation
+- **[Timelapse](timelaspe-walkthough.md)** — Constrained delegation with protocol transition, S4U2Self/S4U2Proxy, certificate-based auth ⏳ In Progress
 - **[Box Practice List](boxes-to-lab.md)** — Curated list of machines organized by topic and difficulty
 
 ### PowerShell & Windows
@@ -218,12 +220,20 @@ reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
 
 ---
 
+## Your Progress
+
+✅ **Phase 1 Complete** — Sauna (enumeration + AS-REP roasting)
+✅ **Phase 2 Complete** — Heist (credential extraction + RBCD escalation)
+🟡 **Phase 3 In Progress** — Timelapse (constrained delegation + S4U2 attacks)
+⚪ **Phase 4 Planned** — Cascade (unconstrained delegation)
+
 ## Progression
 
-1. **Fundamentals First** — Understand AD architecture (Lay of the Land)
-2. **First Box** — Sauna (enumeration + AS-REP roasting)
-3. **Systematic Progression** — Follow boxes-to-lab.md by topic
-4. **Deep Dives** — Delegation, certificate services, trust relationships as you encounter them
+1. **Fundamentals First** — Understand AD architecture (Lay of the Land) ✅
+2. **First Box** — Sauna (enumeration + AS-REP roasting) ✅
+3. **Second Box** — Heist (post-exploitation + escalation patterns) ✅
+4. **Third Box** — Timelapse (delegation mechanisms) 🟡 In Progress
+5. **Continue** — Follow boxes-to-lab.md for unconstrained delegation, AD CS, and advanced topics
 
 ---
 

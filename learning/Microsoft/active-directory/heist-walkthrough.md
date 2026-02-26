@@ -180,6 +180,12 @@ Use ProcDump to extract the memory dump of the Firefox process, which may contai
 
 **Installation:** [Microsoft Sysinternals - ProcDump](https://learn.microsoft.com/en-us/sysinternals/downloads/procdump)
 
+**Privilege Requirements:**
+- **Same user:** No elevation needed. You can dump processes running under your own user account without administrative privileges.
+- **Different user:** Requires SYSTEM or administrative privileges to dump another user's process memory.
+
+**In this case:** Firefox was running under user `hazard`, and we were logged in as `hazard`. No privilege escalation needed for the memory dump.
+
 **Usage:**
 ```powershell
 upload ~/path/to/procdump.exe
