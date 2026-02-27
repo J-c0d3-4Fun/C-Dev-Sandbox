@@ -112,6 +112,8 @@ The solution is not more tools—it's deeper understanding of the configurations
 Before relying on tools, become proficient with native commands:
 
 ```powershell
+
+
 # Current user and groups
 whoami
 whoami /groups
@@ -140,6 +142,40 @@ Get-DomainComputer
 reg query "HKLM\Software\Microsoft\Windows NT\Currentversion\Winlogon"
 reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
 ```
+
+### Post-Exploitation Privilege Escalation
+
+**Initial enumeration:**
+- Start with automated tools: **winPEAS**, **PrivEsc**, or **SharpUp**
+- Tools provide quick identification of common misconfigurations
+
+**Manual history file search (when tools fail):**
+Automated tools may fail to access PowerShell history. Check manually:
+
+```powershell
+# Get history file path
+(Get-PSReadlineOption).HistorySavePath
+
+# Retrieve history
+Get-Content $env:APPDATA\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+```
+
+**Common findings in history:**
+- Plaintext credentials (especially in `ConvertTo-SecureString` commands)
+- Service account credentials
+- Remote access commands with embedded credentials
+- Administrative command chains
+
+**Example credential patterns to search for:**
+```powershell
+# Plaintext password in SecureString
+$p = ConvertTo-SecureString 'PASSWORD_HERE' -AsPlainText -Force
+$c = New-Object System.Management.Automation.PSCredential ('username', $p)
+
+# Remote commands with credentials
+Invoke-Command -ComputerName localhost -Credential $c -Port 5986 -UseSSL -ScriptBlock { whoami }
+```
+
 
 ### Tool-Based Enumeration (After Understanding)
 
@@ -212,7 +248,7 @@ reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
 ### Box Walkthroughs
 - **[Sauna](sauna-walkthrough.md)** — AD enumeration, AS-REP roasting (pre-auth disabled exploitation)
 - **[Heist](heist-walkthrough.md)** — Cisco Type 7 hash cracking, process memory dumping, RBCD escalation
-- **[Timelapse](timelaspe-walkthough.md)** — Constrained delegation with protocol transition, S4U2Self/S4U2Proxy, certificate-based auth ⏳ In Progress
+- **[Timelapse](timelaspe-walkthough.md)** — Certificate extraction, PFX cracking, LAPS enumeration, WinRM certificate auth ✅ Completed
 - **[Box Practice List](boxes-to-lab.md)** — Curated list of machines organized by topic and difficulty
 
 ### PowerShell & Windows
@@ -224,7 +260,7 @@ reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
 
 ✅ **Phase 1 Complete** — Sauna (enumeration + AS-REP roasting)
 ✅ **Phase 2 Complete** — Heist (credential extraction + RBCD escalation)
-🟡 **Phase 3 In Progress** — Timelapse (constrained delegation + S4U2 attacks)
+✅ **Phase 3 Complete** — Timelapse (certificate extraction + LAPS enumeration) — **Completed without full guide!**
 ⚪ **Phase 4 Planned** — Cascade (unconstrained delegation)
 
 ## Progression
@@ -232,8 +268,9 @@ reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings"
 1. **Fundamentals First** — Understand AD architecture (Lay of the Land) ✅
 2. **First Box** — Sauna (enumeration + AS-REP roasting) ✅
 3. **Second Box** — Heist (post-exploitation + escalation patterns) ✅
-4. **Third Box** — Timelapse (delegation mechanisms) 🟡 In Progress
-5. **Continue** — Follow boxes-to-lab.md for unconstrained delegation, AD CS, and advanced topics
+4. **Third Box** — Timelapse (certificate extraction + LAPS enumeration) ✅ **Completed independently**
+5. **Next** — Cascade (unconstrained delegation) or Reel (PrintSpooler + delegation)
+6. **Continue** — Follow boxes-to-lab.md for advanced delegation, AD CS misconfigurations, and cross-domain attacks
 
 ---
 
