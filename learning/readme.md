@@ -18,12 +18,19 @@ This directory contains all study notes, exercises, and educational resources or
 ## Current Focus
 
 **Active Directory & Windows Exploitation** — Building hands-on skills through systematic box progression:
-- Enumeration & initial access (AS-REP roasting)
-- Post-exploitation & credential dumping (process memory, hash extraction)
-- Privilege escalation via delegation attacks (RBCD, constrained, unconstrained)
-- Next: AD Certificate Services misconfigurations
+- ✅ Enumeration & initial access (AS-REP roasting, LDAP enumeration)
+- ✅ Post-exploitation & credential dumping (process memory, hash extraction, NTLM capture)
+- ✅ Privilege escalation via delegation attacks (RBCD, constrained, unconstrained)
+- ✅ AD Certificate Services (AD CS) exploitation and ESC1 attacks
+- Next: Pure delegation exploitation (Reel) or Kerberoasting (Active)
 
-**Boxes:** Sauna ✅ → Heist ✅ → Timelapse 🟡 → Cascade ⚪ → Escape ⚪
+**Boxes Completed:** 
+- Sauna ✅ (AS-REP roasting + enumeration)
+- Heist ✅ (RBCD + credential extraction)
+- Timelapse ✅ (Certificate extraction + LAPS, independently completed)
+- Forest ✅ (Group membership escalation)
+- Cascade ✅ (LDAP enumeration + Recycle Bin + unconstrained delegation)
+- Escape ✅ (SQL Server NTLM + AD CS ESC1 exploitation)
 
 ---
 

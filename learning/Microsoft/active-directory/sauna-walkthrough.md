@@ -22,6 +22,12 @@ Use `-sC` to enable NSE scripts—this reveals DNS information and domain names.
 - **Burp Suite** — Intercept and analyze web traffic for additional domain information
 - **Wappalyzer** — Identify technologies and potential information disclosure
 
+**HTTP POST Request Analysis:**
+
+![Burp Suite: Login POST request with credentials visible](image-1.png)
+
+Initial web enumeration revealed a login form. HTTP interception in Burp Suite shows POST request parameters including test credentials. This initial discovery provides entry points for web application testing and potential credential extraction.
+
 ---
 
 ## LDAP Enumeration

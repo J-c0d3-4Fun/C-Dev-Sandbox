@@ -90,6 +90,28 @@ Windows Setup uses answer files to automate OS configuration. These files can co
 
 ---
 
+## Security Identifiers (SID)
+
+All objects in Active Directory (users, groups, computers) are assigned a Security Identifier (SID). SIDs uniquely identify principals and determine their effective permissions within the domain.
+
+**SID Structure:**
+
+![Security Identifier (SID) Format](image.png)
+
+SID format: `S-1-5-21-[Domain Identifier]-[User/Group RID]`
+
+**Components:**
+- `S` — Indicates a SID
+- `1` — Revision level (always 1)
+- `5` — Authority (SECURITY_NT_AUTHORITY)
+- `21` — Indicates domain SID (21 is reserved for user/group SIDs in domains)
+- `40646273370-243414004410-2375368561` — Domain Identifier (unique per domain)
+- `1036` — Relative Identifier (RID) — unique within the domain
+
+**Attack Relevance:** SIDs are used in ACLs and group memberships. Understanding SID structure is critical for privilege escalation attacks where you need to modify access control lists or forge group memberships.
+
+---
+
 ## Native Windows Tools & Capabilities
 
 ### certutil (Certificate Utility)

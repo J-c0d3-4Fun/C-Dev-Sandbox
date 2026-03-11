@@ -265,7 +265,19 @@ new enumeattion method with my favorit tools:
 - **[Box Practice List](boxes-to-lab.md)** — Curated list of machines organized by topic and difficulty
 
 ### PowerShell & Windows
+- **[PowerView Commands Reference](PowerView/commands.md)** — Systematic guide to PowerView enumeration phases and usage
 - See `/powershell/` for native Windows tooling and enumeration techniques
+
+---
+
+## Visual Aids & Diagrams
+
+The following documents include visual diagrams to understand attack surfaces and architectures:
+
+- **[layOfTheLand.md](layOfTheLand.md)** — SID structure diagram
+- **[sauna-walkthrough.md](sauna-walkthrough.md)** — HTTP request analysis
+- **[cascade-walkthrough.md](cascade-walkthrough.md)** — .NET application decompilation  
+- **[escape-walkthrough.md](escape-walkthrough.md)** — SQL Server error logs and AD CS architecture diagram
 
 ---
 
