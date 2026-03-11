@@ -239,6 +239,16 @@ Invoke-Command -ComputerName localhost -Credential $c -Port 5986 -UseSSL -Script
 
 ---
 
+
+new enumeattion method with my favorit tools:
+1. netexec smb
+2. netexec ldap --bloodhound
+3. powerview.py enum
+4. certipy find
+5. bloodhound analysis
+
+------------
+
 ## Study Materials
 
 ### Fundamentals
@@ -249,6 +259,9 @@ Invoke-Command -ComputerName localhost -Credential $c -Port 5986 -UseSSL -Script
 - **[Sauna](sauna-walkthrough.md)** — AD enumeration, AS-REP roasting (pre-auth disabled exploitation)
 - **[Heist](heist-walkthrough.md)** — Cisco Type 7 hash cracking, process memory dumping, RBCD escalation
 - **[Timelapse](timelaspe-walkthough.md)** — Certificate extraction, PFX cracking, LAPS enumeration, WinRM certificate auth ✅ Completed
+- **[Forest](forest-walkthrough.md)** — AS-REP roasting, privilege escalation via group membership, credential dumping
+- **[Cascade](cascade-walkthrough.md)** — LDAP enumeration, AD Recycle Bin exploitation, unconstrained delegation
+- **[Escape](escape-walkthrough.md)** — SQL Server NTLM capture, AD CS enumeration, ESC1 exploitation, certificate-based privilege escalation
 - **[Box Practice List](boxes-to-lab.md)** — Curated list of machines organized by topic and difficulty
 
 ### PowerShell & Windows
@@ -261,7 +274,9 @@ Invoke-Command -ComputerName localhost -Credential $c -Port 5986 -UseSSL -Script
 ✅ **Phase 1 Complete** — Sauna (enumeration + AS-REP roasting)
 ✅ **Phase 2 Complete** — Heist (credential extraction + RBCD escalation)
 ✅ **Phase 3 Complete** — Timelapse (certificate extraction + LAPS enumeration) — **Completed without full guide!**
-⚪ **Phase 4 Planned** — Cascade (unconstrained delegation)
+✅ **Phase 4 Complete** — Forest (AS-REP roasting + group membership escalation)
+✅ **Phase 5 Complete** — Escape (SQL Server NTLM capture + AD CS ESC1 exploitation)
+⚪ **Phase 6 Planned** — Cascade (unconstrained delegation) or Active (Kerberoasting)
 
 ## Progression
 
@@ -269,8 +284,10 @@ Invoke-Command -ComputerName localhost -Credential $c -Port 5986 -UseSSL -Script
 2. **First Box** — Sauna (enumeration + AS-REP roasting) ✅
 3. **Second Box** — Heist (post-exploitation + escalation patterns) ✅
 4. **Third Box** — Timelapse (certificate extraction + LAPS enumeration) ✅ **Completed independently**
-5. **Next** — Cascade (unconstrained delegation) or Reel (PrintSpooler + delegation)
-6. **Continue** — Follow boxes-to-lab.md for advanced delegation, AD CS misconfigurations, and cross-domain attacks
+5. **Fourth Box** — Forest (AS-REP roasting + group membership escalation) ✅
+6. **Fifth Box** — Escape (SQL Server NTLM + AD CS ESC1 exploitation) ✅
+7. **Next** — Cascade (unconstrained delegation) or Reel (PrintSpooler + delegation)
+8. **Continue** — Follow boxes-to-lab.md for advanced delegation, AD CS misconfigurations, and cross-domain attacks
 
 ---
 

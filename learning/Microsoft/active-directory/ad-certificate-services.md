@@ -225,3 +225,6 @@ msPKI-Cert-Template-OID : 1.3.6.1.4.1.311.21.8.3025710.4393146.2181807.13924342.
 - [Microsoft: AD CS Architecture](https://learn.microsoft.com/en-us/windows-server/identity/ad-cs/ad-cs-overview)
 - [Microsoft: Certificate Templates](https://learn.microsoft.com/en-us/windows-server/identity/ad-cs/certificate-services-core-interface)
 - [PKI Solutions: Object Identifiers in PKI](https://www.pkisolutions.com/object-identifiers-oid-in-pki/)
+
+
+![alt text](image-4.png)
