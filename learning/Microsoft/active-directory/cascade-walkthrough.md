@@ -118,6 +118,16 @@ SELECT * FROM Ldap;
 
 **Tools:** ILSpy-VSCode (decompile .NET binary) or analyzing bytecode
 
+**CascAudit Application Source Code Analysis:**
+
+![ILSpy-VSCode: CascAudit.exe C# code decompilation](image-2.png)
+
+Reverse engineering of the CascAudit.exe binary reveals the application's internal structure:
+- **MainModule class** — Entry point with database initialization
+- **SQLite integration** — Connects to local Audit.db
+- **Crypto operations** — Uses CascCrypto namespace for encryption/decryption
+- **Hardcoded credentials** — Database connection strings and encryption keys may be embedded
+
 **Decryption Pattern Found:**
 ```csharp
 password = Crypto.DecryptString(encryptedString, "c4scadek3y654321");

