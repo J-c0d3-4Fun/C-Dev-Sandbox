@@ -256,12 +256,13 @@ new enumeattion method with my favorit tools:
 - **[AD Certificate Services](ad-certificate-services.md)** — AD CS attack surface, misconfigurations, and exploitation
 
 ### Box Walkthroughs
-- **[Sauna](sauna-walkthrough.md)** — AD enumeration, AS-REP roasting (pre-auth disabled exploitation)
-- **[Heist](heist-walkthrough.md)** — Cisco Type 7 hash cracking, process memory dumping, RBCD escalation
-- **[Timelapse](timelaspe-walkthough.md)** — Certificate extraction, PFX cracking, LAPS enumeration, WinRM certificate auth ✅ Completed
-- **[Forest](forest-walkthrough.md)** — AS-REP roasting, privilege escalation via group membership, credential dumping
-- **[Cascade](cascade-walkthrough.md)** — LDAP enumeration, AD Recycle Bin exploitation, unconstrained delegation
-- **[Escape](escape-walkthrough.md)** — SQL Server NTLM capture, AD CS enumeration, ESC1 exploitation, certificate-based privilege escalation
+- **[Sauna](sauna-walkthrough.md)** ✅ — AD enumeration, AS-REP roasting (pre-auth disabled exploitation)
+- **[Heist](heist-walkthrough.md)** ✅ — Cisco Type 7 hash cracking, process memory dumping, RBCD escalation
+- **[Timelapse](timelaspe-walkthough.md)** ✅ — Certificate extraction, PFX cracking, LAPS enumeration, WinRM certificate auth
+- **[Forest](forest-walkthrough.md)** ✅ — AS-REP roasting, privilege escalation via group membership, credential dumping
+- **[Cascade](cascade-walkthrough.md)** ✅ — LDAP enumeration, AD Recycle Bin exploitation, unconstrained delegation
+- **[Escape](escape-walkthrough.md)** ✅ — SQL Server NTLM capture, AD CS enumeration, ESC1 exploitation, certificate-based privilege escalation
+- **[Active](active-walkthrough.md)** ✅ — GPP credential extraction, Kerberoasting, hash cracking (Administrator SPN abuse)
 - **[Box Practice List](boxes-to-lab.md)** — Curated list of machines organized by topic and difficulty
 
 ### PowerShell & Windows
@@ -288,7 +289,9 @@ The following documents include visual diagrams to understand attack surfaces an
 ✅ **Phase 3 Complete** — Timelapse (certificate extraction + LAPS enumeration) — **Completed without full guide!**
 ✅ **Phase 4 Complete** — Forest (AS-REP roasting + group membership escalation)
 ✅ **Phase 5 Complete** — Escape (SQL Server NTLM capture + AD CS ESC1 exploitation)
-⚪ **Phase 6 Planned** — Cascade (unconstrained delegation) or Active (Kerberoasting)
+✅ **Phase 6 Complete** — Cascade (LDAP enumeration + unconstrained delegation abuse)
+✅ **Phase 7 Complete** — Active (GPP credential extraction + Kerberoasting + hash cracking)
+⚪ **Phase 8 Planned** — Reel (PrintSpooler + unconstrained delegation) OR Monteverde (BloodHound + Azure AD)
 
 ## Progression
 
@@ -298,8 +301,10 @@ The following documents include visual diagrams to understand attack surfaces an
 4. **Third Box** — Timelapse (certificate extraction + LAPS enumeration) ✅ **Completed independently**
 5. **Fourth Box** — Forest (AS-REP roasting + group membership escalation) ✅
 6. **Fifth Box** — Escape (SQL Server NTLM + AD CS ESC1 exploitation) ✅
-7. **Next** — Cascade (unconstrained delegation) or Reel (PrintSpooler + delegation)
-8. **Continue** — Follow boxes-to-lab.md for advanced delegation, AD CS misconfigurations, and cross-domain attacks
+7. **Sixth Box** — Cascade (LDAP enumeration + unconstrained delegation) ✅
+8. **Seventh Box** — Active (GPP credential extraction + Kerberoasting) ✅
+9. **Next** — Monteverde (Medium) for BloodHound fundamentals OR Reel (Hard) for PrintSpooler + unconstrained delegation
+10. **Continue** — Follow boxes-to-lab.md for advanced delegation, AD CS misconfigurations, and cross-domain attacks
 
 ---
 
