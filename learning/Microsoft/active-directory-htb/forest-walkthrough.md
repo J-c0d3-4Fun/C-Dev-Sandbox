@@ -101,6 +101,17 @@ jbrown@Jabaris-MacBook-Pro windapsearch % ./windapsearch.py -d htb.local --dc-ip
 
 **Result:** Anonymous bind successful, found domain context `DC=htb,DC=local`.
 
+### Targeted Group Search with Credentials
+
+**Command:**
+```bash
+jbrown@Jabaris-MacBook-Pro windapsearch % ./windapsearch.py -d htb.local --dc-ip 10.129.1.13 -u svc-alfresco -p s3rvice -l "Service Accounts" --full
+```
+
+**Purpose:** After obtaining credentials (svc-alfresco:s3rvice), perform a detailed search for specific groups like "Service Accounts" to retrieve full object details and identify privilege escalation paths.
+
+---
+
 ### Group Enumeration
 
 **Command:**

@@ -239,21 +239,114 @@ Invoke-Command -ComputerName localhost -Credential $c -Port 5986 -UseSSL -Script
 
 ---
 
+## Practical Enumeration Workflow
 
-new enumeattion method with my favorit tools:
-1. netexec smb
-2. netexec ldap --bloodhound
-3. powerview.py enum
-4. certipy find
-5. bloodhound analysis
+### Recommended Tool Chain
 
-------------
+A structured workflow using modern tools for efficient AD enumeration:
+
+1. **NetExec SMB** — Quick domain discovery and credential testing
+2. **NetExec LDAP with BloodHound** — Automated graph data collection
+3. **PowerView.py** — Cross-platform user/group/delegation enumeration
+4. **Certipy** — AD Certificate Services discovery
+5. **BloodHound Analysis** — Visual attack path identification
+
+---
+
+## Kerberos Delegation Quick Reference
+
+### What to Look For
+
+When running PowerView or BloodHound enumeration, search for these critical properties:
+
+| Property | Delegation Type | Attack |
+|:---|:---|:---|
+| `TrustedForDelegation = TRUE` | Unconstrained | TGT theft |
+| `msDS-AllowedToDelegateTo` | Constrained | S4U2Self/S4U2Proxy |
+| `msDS-AllowedToActOnBehalfOfOtherIdentity` | Resource-Based (RBCD) | Machine account compromise |
+
+### Unconstrained Delegation - How It Works
+
+**Setup:**
+- Machine (e.g., WEB01$) has `TrustedForDelegation = TRUE`
+- ANY user that authenticates to WEB01 has their TGT cached in memory
+
+**Exploitation Chain:**
+1. Gain SYSTEM/admin privileges on WEB01
+2. Retrieve cached TGT from memory
+3. Impersonate the user (often domain admin)
+4. Access any service on the domain
+
+**Enumeration Commands:**
+```powershell
+Get-DomainComputer -Unconstrained
+get-netsession -ComputerName [computer_name]
+get-netloggedon -ComputerName [computer_name]  # Requires admin
+```
+
+### Constrained Delegation - How It Works
+
+**Setup:**
+- Service account has `msDS-AllowedToDelegateTo` property
+- Lists specific services the account can impersonate to
+
+**Exploitation Chain:**
+1. Compromise service account credentials
+2. Use S4U2Self to request TGT as any user
+3. Use S4U2Proxy to request service ticket using cached TGT
+4. Access the specified service as that user
+
+### Resource-Based Constrained Delegation (RBCD) - How It Works
+
+**Setup:**
+- Target machine has `msDS-AllowedToActOnBehalfOfOtherIdentity` set
+- Allows specified machine accounts to impersonate users
+
+**Exploitation Chain:**
+1. Compromise or create machine account
+2. Set RBCD on target to trust attacker's machine
+3. Impersonate any user when accessing target services
+
+---
+
+## Quick PowerView Enumeration Commands
+
+### User & Group Enumeration
+```powershell
+Get-Domain
+Get-DomainUser -SPN                           # Kerberoasting targets
+Get-DomainUser -AdminCount                    # Admin users
+Get-DomainGroupMember "Domain Admins"         # List domain admins
+```
+
+### Delegation & Privilege Discovery
+```powershell
+Get-DomainComputer -TrustedForDelegation      # Unconstrained delegation
+Get-DomainObjectAcl                            # All ACL permissions
+Invoke-Kerberoast                              # Request SPN tickets
+Find-LocalAdminAccess                          # Local admin access paths
+```
+
+---
+
+## Common Attack Goals
+
+| Attack Type | Objective | Primary Tool |
+|:---|:---|:---|
+| **Kerberoasting** | Crack service account password | GetUserSPNs.py / Invoke-Kerberoast |
+| **AS-REP Roasting** | Crack user password (pre-auth disabled) | GetNPUsers.py |
+| **Delegation Abuse** | Steal TGT and impersonate high-privilege user | Rubeus / Impacket |
+| **Certificate Escalation** | Obtain admin certificate via AD CS | Certipy / Certify.exe |
+
+---
 
 ## Study Materials
 
 ### Fundamentals
 - **[Lay of the Land](layOfTheLand.md)** — AD architecture, Group Policy, credentials, and native tools
 - **[AD Certificate Services](ad-certificate-services.md)** — AD CS attack surface, misconfigurations, and exploitation
+- **[Attack Tree](attack-tree.md)** — Decision tree for AD enumeration and exploitation
+- **[LOLBins Reference](lolbins.md)** — Living Off The Land binaries and AD-specific tools
 
 ### Box Walkthroughs
 - **[Sauna](sauna-walkthrough.md)** ✅ — AD enumeration, AS-REP roasting (pre-auth disabled exploitation)
@@ -263,10 +356,11 @@ new enumeattion method with my favorit tools:
 - **[Cascade](cascade-walkthrough.md)** ✅ — LDAP enumeration, AD Recycle Bin exploitation, unconstrained delegation
 - **[Escape](escape-walkthrough.md)** ✅ — SQL Server NTLM capture, AD CS enumeration, ESC1 exploitation, certificate-based privilege escalation
 - **[Active](active-walkthrough.md)** ✅ — GPP credential extraction, Kerberoasting, hash cracking (Administrator SPN abuse)
+- **[Monteverde](monteverde-walkthrough.md)** ✅ — BloodHound enumeration, Azure AD Connect credential extraction
 - **[Box Practice List](boxes-to-lab.md)** — Curated list of machines organized by topic and difficulty
 
 ### PowerShell & Windows
-- **[PowerView Commands Reference](PowerView/commands.md)** — Systematic guide to PowerView enumeration phases and usage
+- **[PowerView Commands Reference](PowerView/commands.md)** — Systematic guide to PowerView (PowerShell) and PowerView.py (Linux) enumeration
 - See `/powershell/` for native Windows tooling and enumeration techniques
 
 ---
@@ -291,7 +385,8 @@ The following documents include visual diagrams to understand attack surfaces an
 ✅ **Phase 5 Complete** — Escape (SQL Server NTLM capture + AD CS ESC1 exploitation)
 ✅ **Phase 6 Complete** — Cascade (LDAP enumeration + unconstrained delegation abuse)
 ✅ **Phase 7 Complete** — Active (GPP credential extraction + Kerberoasting + hash cracking)
-⚪ **Phase 8 Planned** — Reel (PrintSpooler + unconstrained delegation) OR Monteverde (BloodHound + Azure AD)
+✅ **Phase 8 Complete** — Monteverde (BloodHound enumeration + Azure AD Connect exploitation)
+⚪ **Phase 9 Planned** — Reel (PrintSpooler + unconstrained delegation) OR Advanced Forest/Domain trusts
 
 ## Progression
 
@@ -303,8 +398,9 @@ The following documents include visual diagrams to understand attack surfaces an
 6. **Fifth Box** — Escape (SQL Server NTLM + AD CS ESC1 exploitation) ✅
 7. **Sixth Box** — Cascade (LDAP enumeration + unconstrained delegation) ✅
 8. **Seventh Box** — Active (GPP credential extraction + Kerberoasting) ✅
-9. **Next** — Monteverde (Medium) for BloodHound fundamentals OR Reel (Hard) for PrintSpooler + unconstrained delegation
-10. **Continue** — Follow boxes-to-lab.md for advanced delegation, AD CS misconfigurations, and cross-domain attacks
+9. **Eighth Box** — Monteverde (BloodHound fundamentals + Azure AD Connect) ✅
+10. **Next** — Reel (Hard) for PrintSpooler + unconstrained delegation OR advanced AD forests/trusts
+11. **Continue** — Follow boxes-to-lab.md for advanced delegation, AD CS misconfigurations, and cross-domain attacks
 
 ---
 
