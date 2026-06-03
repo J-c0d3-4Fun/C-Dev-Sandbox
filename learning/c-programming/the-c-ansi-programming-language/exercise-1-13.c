@@ -13,11 +13,11 @@ int main(){
 
 
 
-    int c, i, state;
-    int woccurence[10];
+    int c, i,j, state;
+    int woccurence[20];
     int wlength = 0;
 
-    for (i = 0; i < 10; ++i) {
+    for (i = 0; i < 20; ++i) {
         woccurence[i] = 0;
     }
 
@@ -37,8 +37,15 @@ int main(){
         }   
         
     }
-    printf("WordLength = ");
-        for (i = 0; i < 10; ++i) {
-        printf("%d", woccurence[i]);
+    if (state == 1)
+        ++woccurence[wlength];
+    printf("Histogram ");
+        for (i = 0; i < 20; ++i) {
+        printf("%d ",i);
+        for (j = 0;j < woccurence[i]; ++j) {
+            printf("*");
+        }
+        printf("\n");
+        
     }
 }
