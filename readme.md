@@ -55,6 +55,7 @@ clang filename.c -o output_name
 
 **Detailed study materials are organized in [`/learning`](learning/).** See subdirectories for:
 - **C Programming** — Beej's guides with comprehensive notes and labs
+- **C Programming** — K&R book notes and exercises
 - **Windows & Active Directory** — CRTP fundamentals and tradecraft
 
 ### 🎓 Certifications & Courses
