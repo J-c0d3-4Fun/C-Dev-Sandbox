@@ -21,8 +21,8 @@ int main() {
             column = 0;
             putchar(c);
         } else if (next_stop > column) {
+                next_stop = ((column / TABSTOP) + 1) * TABSTOP;
                 spaces = next_stop - column;
-                putchar(c);
                 for (int i = 0; i < spaces; i++) {
                     putchar(' ');
                 }
